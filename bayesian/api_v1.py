@@ -928,13 +928,10 @@ class StackAnalyses(Resource):
         try:
             insert_stmt = insert(StackAnalysisRequest).values(
                 id=request_id,
-                submitTime=str(dt),
-                requestJson={'manifest': manifests},
-                dep_snapshot=deps
+                submitTime=str(dt)
             )
             do_update_stmt = insert_stmt.on_conflict_do_update(
-                index_elements=['id'],
-                set_=dict(dep_snapshot=deps)
+                index_elements=['id']
             )
             rdb.session.execute(do_update_stmt)
             rdb.session.commit()
