@@ -9,6 +9,7 @@ import datetime
 import os
 import hashlib
 import logging
+import json
 from selinon import run_flow
 from flask import current_app
 from flask.json import JSONEncoder
@@ -78,6 +79,10 @@ def create_component_bookkeeping(ecosystem, packages_list, source,
             'source': source
         }
     }
+
+    print("..........................................................................................................")
+    print(json.dumps(args,indent=5))
+
     return server_run_flow('componentApiFlow', args)
 
 
